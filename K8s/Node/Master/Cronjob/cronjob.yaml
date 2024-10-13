@@ -1,0 +1,19 @@
+kubernetes apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: mycronjob
+spec:
+  schedule: "*/1 * * * *"
+  successfulJobHistoryLimit: 5
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: busybox
+            image: busybox
+            args:
+            - /bin/sh
+            - -c
+            - date; echo "Cronjob is running"
+          restartPolicy: Never

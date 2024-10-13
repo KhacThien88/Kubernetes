@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  containers:
+    - name: my-container
+      image: nginx:latest
+      ports:
+        - containerPort: 80
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+  nodeSelector:
+    disk: ssd
+  podAffinity:
+  requiredDuringSchedulingIgnoredDuringExecution:  # Cần thụt dòng chính xác
+    labelSelector:
+      matchExpressions:
+        # - key: app
+        #   operator: In
+        #   values:
+        #     - my-app
+        - key: environment
+          operator: NotIn
+          values:
+            - staging
+    topologyKey: kubernetes.io/hostname

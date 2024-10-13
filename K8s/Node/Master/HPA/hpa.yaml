@@ -1,0 +1,19 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: rsapp-scaler
+spec:
+  scaleTargetRef:
+    apiVersion: apps
+    kind: ReplicaSet
+    name: rsapp
+  minReplicas: 5
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 50
+  # metrics:
+  # - type: Resource
+  #   resource:
+  #     name: cpu
+  #     target:
+  #       type: Utilization
+  #       averageUtilization: 50

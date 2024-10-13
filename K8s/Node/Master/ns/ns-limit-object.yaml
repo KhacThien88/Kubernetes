@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: limit-object
+  namespace: ns-production
+spec:
+  hard:
+    pod: "2"
+    services: "5"
+    configmaps: "10"

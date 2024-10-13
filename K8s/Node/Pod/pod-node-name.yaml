@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  nodeName: nodename
+  containers:
+    - name: nginx
+      image: nginx
+      imagePullPolicy: IfNotPresent
+      resources:  # Thêm phần giới hạn tài nguyên
+        requests:
+          memory: "64Mi"  # Yêu cầu tối thiểu
+          cpu: "250m"
+        limits:
+          memory: "128Mi"  # Giới hạn tối đa
+          cpu: "500m"

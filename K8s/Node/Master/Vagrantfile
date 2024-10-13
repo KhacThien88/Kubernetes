@@ -1,0 +1,18 @@
+Vagrant.configure("2") do |config|
+    config.vm.box = "ubuntu/focal64"
+    config.ssh.insert_key = false
+    config.vm.network "private_network", ip: "172.20.20.20"
+    config.vm.synced_folder "./", "/home/vagrant"
+    config.vm.provider "virtualbox" do |vb|
+         vb.gui = true                  # Bật giao diện GUI
+           vb.linked_clone = false         # Không sử dụng linked clone
+           vb.customize ["modifyvm", :id, "--nic1", "nat"]  # Cấu hình NIC cho máy ảo
+       end
+    config.vm.provision "shell", path: "./install.sh"
+      # echo "root password"
+      # echo "123" | passwd --stdin root
+      # sed -i 's/^PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
+      # systemctl reload sshd
+    #SHELL
+end
+  
